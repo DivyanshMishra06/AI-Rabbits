@@ -57,7 +57,7 @@ export default function About() {
             {/* Text */}
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
               <span className="tag mb-5 inline-block">About Me</span>
-              <h1 className="font-display font-extrabold text-5xl text-white mb-6 leading-tight">
+              <h1 className="font-display font-extrabold text-3xl sm:text-5xl text-white mb-6 leading-tight">
                 Hi, I'm{' '}
                 <span className="gradient-text">Divyansh</span> 👋
               </h1>

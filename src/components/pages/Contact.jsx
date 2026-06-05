@@ -63,7 +63,7 @@ export default function Contact() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
             <span className="tag mb-5 inline-block">Get In Touch</span>
-            <h1 className="font-display font-extrabold text-5xl sm:text-6xl text-white mb-6 leading-tight">
+            <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight">
               Let's Build Something{' '}
               <span className="gradient-text">Amazing</span>
             </h1>

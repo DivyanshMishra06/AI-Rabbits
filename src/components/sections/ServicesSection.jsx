@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FiMonitor, FiCode, FiShoppingBag, FiLayers, FiCpu, FiTool, FiArrowRight } from 'react-icons/fi'
+import { FiMonitor, FiCode, FiShoppingBag, FiLayers, FiCpu, FiTool, FiArrowRight, FiCheck } from 'react-icons/fi'
 import { services } from '../../data'
 
-const iconMap = {
-  FiMonitor, FiCode, FiShoppingBag, FiLayers, FiCpu, FiTool,
-}
+const iconMap = { FiMonitor, FiCode, FiShoppingBag, FiLayers, FiCpu, FiTool }
 
 export default function ServicesSection() {
   const ref = useRef(null)
@@ -15,10 +12,12 @@ export default function ServicesSection() {
 
   return (
     <section ref={ref} className="py-24 relative">
-      <div className="orb w-96 h-96 bg-brand-500/[0.04] top-1/2 left-0 -translate-y-1/2" />
+      <div className="orb w-[500px] h-[500px] bg-brand-500/[0.05] top-1/2 -left-32 -translate-y-1/2" />
+      <div className="orb w-[400px] h-[400px] bg-accent-500/[0.04] bottom-0 right-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -34,57 +33,68 @@ export default function ServicesSection() {
           </p>
         </motion.div>
 
-        {/* Cards grid */}
+        {/* Service cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service, i) => {
             const Icon = iconMap[service.icon]
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 36 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className={`glass-card gradient-border p-6 group hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden`}
+                transition={{ delay: i * 0.1, duration: 0.55 }}
+                className="glass-card gradient-border group relative overflow-hidden flex flex-col"
+                style={{ padding: 0 }}
               >
-                {/* BG gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
+                {/* Top gradient bar */}
+                <div className={`h-1 w-full bg-gradient-to-r ${service.color} opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
 
-                {/* Tag */}
-                {service.tag && (
-                  <span className="absolute top-4 right-4 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30">
-                    {service.tag}
-                  </span>
-                )}
+                <div className="p-6 flex flex-col flex-1 relative">
+                  {/* BG hover fill */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500`} />
 
-                <div className="relative z-10">
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${service.color} border ${service.border} flex items-center justify-center mb-4`}>
-                    {Icon && <Icon className={`w-5 h-5 ${service.accent}`} />}
-                  </div>
+                  {/* Tag badge */}
+                  {service.tag && (
+                    <span className="absolute top-4 right-4 text-[10px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-brand-500/15 text-brand-400 border border-brand-500/25">
+                      {service.tag}
+                    </span>
+                  )}
 
-                  <h3 className="font-display font-bold text-lg text-white mb-2">{service.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{service.shortDesc}</p>
-
-                  <ul className="space-y-1.5 mb-5">
-                    {service.features.slice(0, 4).map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-gray-500">
-                        <span className={`w-1.5 h-1.5 rounded-full ${service.accent.replace('text-', 'bg-')} shrink-0`} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-gray-600 text-xs">Starting at</span>
-                      <p className={`font-display font-bold text-base ${service.accent}`}>{service.startingPrice}</p>
+                  <div className="relative z-10 flex flex-col flex-1">
+                    {/* Icon */}
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${service.color} border ${service.border} flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                      {Icon && <Icon className={`w-5 h-5 ${service.accent}`} />}
                     </div>
-                    <Link
-                      to="/services"
-                      className="flex items-center gap-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
-                    >
-                      Learn more
-                      <FiArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
+
+                    <h3 className="font-display font-bold text-lg text-white mb-2">{service.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-4">{service.shortDesc}</p>
+
+                    {/* Feature list */}
+                    <ul className="space-y-2 mb-6 flex-1">
+                      {service.features.slice(0, 4).map((f) => (
+                        <li key={f} className="flex items-center gap-2.5 text-sm text-gray-400">
+                          <span className={`w-4 h-4 rounded-full ${service.accent.replace('text-', 'bg-')} bg-opacity-20 flex items-center justify-center shrink-0`}>
+                            <FiCheck className={`w-2.5 h-2.5 ${service.accent}`} />
+                          </span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                      <div>
+                        <span className="text-gray-600 text-xs">Starting at</span>
+                        <p className={`font-display font-bold text-base ${service.accent}`}>{service.startingPrice}</p>
+                      </div>
+                      <Link
+                        to="/services"
+                        className={`flex items-center gap-1.5 text-sm font-medium ${service.accent} opacity-60 hover:opacity-100 transition-opacity group/link`}
+                      >
+                        Learn more
+                        <FiArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -96,10 +106,10 @@ export default function ServicesSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.7 }}
-          className="text-center mt-10"
+          transition={{ delay: 0.8 }}
+          className="text-center mt-12"
         >
-          <Link to="/services" className="btn-secondary inline-flex items-center gap-2">
+          <Link to="/services" className="btn-secondary inline-flex items-center gap-2 px-8 py-3">
             View All Services
             <FiArrowRight className="w-4 h-4" />
           </Link>
