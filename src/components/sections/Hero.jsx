@@ -1,156 +1,195 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FiArrowRight, FiPlay, FiZap, FiShield, FiTrendingUp } from 'react-icons/fi'
+import { FiArrowRight, FiCheckCircle, FiTrendingUp, FiShield, FiZap } from 'react-icons/fi'
 
-const floatingCards = [
-  {
-    icon: <FiZap className="w-4 h-4 text-yellow-400" />,
-    title: 'Performance',
-    value: '99 / 100',
-    sub: 'PageSpeed Score',
-    gradient: 'from-yellow-500/20 to-orange-500/10',
-    border: 'border-yellow-500/30',
-    glow: '0 8px 28px rgba(234,179,8,0.15)',
-    delay: 0,
-    position: 'top-16 right-4 md:top-24 md:right-10',
-  },
-  {
-    icon: <FiShield className="w-4 h-4 text-emerald-400" />,
-    title: 'Security',
-    value: 'A+',
-    sub: 'SSL & OWASP',
-    gradient: 'from-emerald-500/20 to-teal-500/10',
-    border: 'border-emerald-500/30',
-    glow: '0 8px 28px rgba(16,185,129,0.15)',
-    delay: 0.2,
-    position: 'bottom-32 right-0 md:bottom-44 md:right-6',
-  },
-  {
-    icon: <FiTrendingUp className="w-4 h-4 text-brand-400" />,
-    title: 'Uptime',
-    value: '99.9%',
-    sub: 'Guaranteed SLA',
-    gradient: 'from-brand-500/20 to-accent-500/10',
-    border: 'border-brand-500/30',
-    glow: '0 8px 28px rgba(14,165,233,0.15)',
-    delay: 0.4,
-    position: 'top-40 left-0 md:top-52 md:left-6',
-  },
+const highlights = [
+  { icon: FiZap,        label: 'Agile Delivery' },
+  { icon: FiShield,     label: 'Enterprise Security' },
+  { icon: FiTrendingUp, label: 'Proven Results' },
 ]
 
 const techBadges = [
-  { name: 'React',       cls: 'text-brand-400  border-brand-500/30  bg-brand-500/10' },
-  { name: 'Next.js',     cls: 'text-white       border-white/20      bg-white/5' },
-  { name: 'Node.js',     cls: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
-  { name: 'TypeScript',  cls: 'text-blue-400    border-blue-500/30   bg-blue-500/10' },
-  { name: 'Tailwind',    cls: 'text-cyan-400    border-cyan-500/30   bg-cyan-500/10' },
-  { name: 'MongoDB',     cls: 'text-green-400   border-green-500/30  bg-green-500/10' },
-  { name: 'PostgreSQL',  cls: 'text-sky-400     border-sky-500/30    bg-sky-500/10' },
-  { name: 'Docker',      cls: 'text-blue-300    border-blue-400/30   bg-blue-400/10' },
+  'React', 'Next.js', 'Node.js', 'TypeScript',
+  'Tailwind CSS', 'MongoDB', 'PostgreSQL', 'Docker',
+  'AWS', 'GraphQL', 'Redis', 'Kubernetes',
+]
+
+const stats = [
+  { value: '50+',   label: 'Projects Delivered' },
+  { value: '30+',   label: 'Clients Worldwide' },
+  { value: '99.9%', label: 'Uptime SLA' },
+  { value: '3+',    label: 'Years of Excellence' },
 ]
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Layered background */}
-      <div className="absolute inset-0 bg-surface-900" />
-      <div className="absolute inset-0 aurora-bg" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0A0A0F] lg:pt-[28px]">
 
-      {/* Dot grid with radial fade */}
+      {/* Subtle grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.045]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            'radial-gradient(circle, rgba(56,189,248,0.8) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-          maskImage:
-            'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)',
+            'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),' +
+            'linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
         }}
       />
 
-      {/* Glow orbs */}
-      <div className="orb w-[700px] h-[500px] bg-brand-500/[0.07] top-1/2 left-1/3 -translate-y-1/2 animate-pulse-slow" />
-      <div className="orb w-[450px] h-[450px] bg-accent-500/[0.07] -top-24 right-[-8%] animate-pulse-slow" style={{ animationDelay: '2s' }} />
-      <div className="orb w-[350px] h-[300px] bg-rose-500/[0.04] bottom-0 left-[8%] animate-pulse-slow" style={{ animationDelay: '4s' }} />
+      {/* Birlasoft-style red laser beam lines — right side */}
+      <div className="absolute right-0 top-0 w-[55%] h-full overflow-hidden pointer-events-none">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 800 800"
+          preserveAspectRatio="xMaxYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Lines radiating from focal point (750, 400) */}
+          <line x1="750" y1="400" x2="0" y2="30" stroke="#E31837" strokeWidth="1.8">
+            <animate attributeName="opacity" values="0.55;0.2;0.55" dur="4s" repeatCount="indefinite" begin="0s" />
+          </line>
+          <line x1="750" y1="400" x2="120" y2="0" stroke="#E31837" strokeWidth="1.2">
+            <animate attributeName="opacity" values="0.4;0.12;0.4" dur="3.5s" repeatCount="indefinite" begin="0.6s" />
+          </line>
+          <line x1="750" y1="400" x2="320" y2="0" stroke="#E31837" strokeWidth="0.9">
+            <animate attributeName="opacity" values="0.3;0.08;0.3" dur="4.8s" repeatCount="indefinite" begin="1.1s" />
+          </line>
+          <line x1="750" y1="400" x2="550" y2="0" stroke="#E31837" strokeWidth="0.6">
+            <animate attributeName="opacity" values="0.22;0.06;0.22" dur="3.2s" repeatCount="indefinite" begin="0.3s" />
+          </line>
+          <line x1="750" y1="400" x2="0" y2="200" stroke="#E31837" strokeWidth="1.4">
+            <animate attributeName="opacity" values="0.45;0.15;0.45" dur="5s" repeatCount="indefinite" begin="0.8s" />
+          </line>
+          <line x1="750" y1="400" x2="0" y2="380" stroke="#E31837" strokeWidth="1">
+            <animate attributeName="opacity" values="0.35;0.1;0.35" dur="4.2s" repeatCount="indefinite" begin="1.4s" />
+          </line>
+          <line x1="750" y1="400" x2="0" y2="580" stroke="#E31837" strokeWidth="1.2">
+            <animate attributeName="opacity" values="0.4;0.12;0.4" dur="3.8s" repeatCount="indefinite" begin="0.2s" />
+          </line>
+          <line x1="750" y1="400" x2="0" y2="750" stroke="#E31837" strokeWidth="0.9">
+            <animate attributeName="opacity" values="0.3;0.08;0.3" dur="4.5s" repeatCount="indefinite" begin="0.9s" />
+          </line>
+          <line x1="750" y1="400" x2="200" y2="800" stroke="#E31837" strokeWidth="0.7">
+            <animate attributeName="opacity" values="0.25;0.07;0.25" dur="3.6s" repeatCount="indefinite" begin="1.6s" />
+          </line>
+          <line x1="750" y1="400" x2="450" y2="800" stroke="#E31837" strokeWidth="0.6">
+            <animate attributeName="opacity" values="0.2;0.06;0.2" dur="4.3s" repeatCount="indefinite" begin="0.4s" />
+          </line>
+          {/* Cross-hatch lines for lattice depth */}
+          <line x1="0" y1="0" x2="800" y2="450" stroke="#E31837" strokeWidth="0.4" opacity="0.12" />
+          <line x1="0" y1="200" x2="800" y2="600" stroke="#E31837" strokeWidth="0.3" opacity="0.09" />
+          <line x1="100" y1="0" x2="800" y2="700" stroke="#E31837" strokeWidth="0.4" opacity="0.1" />
+          <line x1="0" y1="350" x2="800" y2="300" stroke="#E31837" strokeWidth="0.3" opacity="0.08" />
+          {/* Focal point glow */}
+          <circle cx="750" cy="400" r="6" fill="#E31837" opacity="0.2" />
+          <circle cx="750" cy="400" r="18" fill="none" stroke="#E31837" strokeWidth="1" opacity="0.12" />
+          <circle cx="750" cy="400" r="45" fill="none" stroke="#E31837" strokeWidth="0.5" opacity="0.07" />
+          <circle cx="750" cy="400" r="90" fill="none" stroke="#E31837" strokeWidth="0.4" opacity="0.04" />
+        </svg>
+      </div>
+
+      {/* Radial dark-red glow behind focal point */}
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 w-[45%] h-[70%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 90% 50%, rgba(227,24,55,0.07) 0%, transparent 65%)' }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
-          {/* ── Left Content ── */}
-          <div className="text-center lg:text-left min-w-0 overflow-hidden">
-
-            {/* Availability badge */}
+          {/* ── Left content ── */}
+          <div className="min-w-0">
+            {/* Status badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-mono mb-7"
+              className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/8"
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              <span className="flex h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
+              <span className="text-brand-400 text-xs font-mono font-bold tracking-[0.18em] uppercase">
+                Accepting New Projects
               </span>
-              Available for new projects
             </motion.div>
 
-            {/* Headline */}
+            {/* Headline — Birlasoft-style large white text */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display font-extrabold text-[2rem] sm:text-5xl xl:text-[3.6rem] text-white leading-[1.1] mb-6"
+              className="font-display font-extrabold text-4xl sm:text-5xl xl:text-[3.5rem] text-white leading-[1.06] tracking-tight mb-6 text-balance"
             >
-              Custom Websites &{' '}
-              <span className="gradient-text">Web Applications</span>{' '}
-              for Modern Businesses
+              Engineering{' '}
+              <span className="text-brand-400">Digital Solutions</span>
+              <br />
+              That Drive Business Growth
             </motion.h1>
 
-            {/* Subtext */}
+            {/* Sub */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-gray-400 text-lg leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0"
+              className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl"
             >
-              Fast, scalable, secure, and stunning digital products that help businesses grow online — from landing pages to full SaaS platforms.
+              AI Rabbits is a professional IT services company delivering custom web applications, SaaS platforms, and enterprise software for businesses across India and worldwide.
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            {/* Bullet points */}
+            <motion.ul
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="space-y-2.5 mb-10"
             >
-              <Link to="/contact" className="btn-primary flex items-center gap-2 px-7 py-3.5">
-                Start Your Project
+              {[
+                'End-to-end product development from idea to launch',
+                'Dedicated team with transparent project management',
+                'Post-launch support, maintenance & scaling',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-gray-300">
+                  <FiCheckCircle className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
+
+            {/* CTA buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="flex flex-wrap gap-3 mb-12"
+            >
+              <Link to="/contact" className="btn-accent flex items-center gap-2 px-7 py-3.5 text-base">
+                Start a Project
                 <FiArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/portfolio" className="btn-secondary flex items-center gap-2 px-7 py-3.5">
-                <FiPlay className="w-4 h-4" />
-                View Portfolio
+              <Link
+                to="/portfolio"
+                className="px-7 py-3.5 text-base font-display font-semibold rounded-lg border border-white/20 text-white hover:bg-white/8 hover:border-white/35 transition-all duration-200 flex items-center gap-2"
+              >
+                View Our Work
               </Link>
             </motion.div>
 
-            {/* Tech badge marquee */}
+            {/* Tech marquee */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
             >
-              <p className="text-gray-600 text-xs font-mono mb-3 text-center lg:text-left tracking-wider uppercase">
-                Built with modern tech:
+              <p className="text-gray-600 text-[10px] font-mono tracking-[0.18em] uppercase mb-3">
+                Technologies we work with
               </p>
               <div className="marquee-container">
                 <div className="marquee-track">
-                  {[...techBadges, ...techBadges].map((tech, i) => (
+                  {[...techBadges, ...techBadges].map((t, i) => (
                     <span
                       key={i}
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium border flex-shrink-0 ${tech.cls}`}
+                      className="inline-flex items-center px-3 py-1 rounded text-[11px] font-mono font-medium border border-white/10 text-gray-500 bg-white/[0.03] flex-shrink-0"
                     >
-                      {tech.name}
+                      {t}
                     </span>
                   ))}
                 </div>
@@ -158,131 +197,113 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* ── Right — Dashboard Mockup ── */}
-          <div className="relative flex items-center justify-center">
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.88, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-[440px]"
+          {/* ── Right — dark enterprise metrics card ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="relative min-w-0"
+          >
+            {/* Main card */}
+            <div
+              className="rounded-xl border p-6 shadow-2xl"
+              style={{ background: 'rgb(15 15 22)', borderColor: 'rgb(40 40 55)' }}
             >
-              {/* Glow halo */}
-              <div className="absolute inset-0 bg-brand-500/[0.08] blur-3xl rounded-3xl scale-110 animate-pulse-slow" />
-
-              {/* Dashboard card */}
-              <div className="relative glass-card gradient-border p-5 shadow-2xl shadow-black/50">
-
-                {/* Browser chrome */}
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/90" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/90" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/90" />
-                  </div>
-                  <div className="flex-1 h-6 bg-white/[0.06] rounded-lg border border-white/[0.08] flex items-center px-3 gap-2">
-                    <FiShield className="w-3 h-3 text-emerald-400 shrink-0" />
-                    <span className="text-gray-500 text-[10px] font-mono truncate">airabbits.com/dashboard</span>
-                  </div>
+              {/* Top bar */}
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/[0.07]">
+                <div>
+                  <p className="text-gray-500 text-[11px] font-mono uppercase tracking-wider mb-1">
+                    Project Dashboard
+                  </p>
+                  <p className="text-white font-display font-bold text-base">AI Rabbits · 2025</p>
                 </div>
+                <span className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live
+                </span>
+              </div>
 
-                {/* Chart area */}
-                <div className="bg-white/[0.02] rounded-xl border border-white/[0.05] p-4 mb-3">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <p className="text-gray-500 text-[10px] font-mono uppercase tracking-wider">Revenue Growth</p>
-                      <p className="text-white text-xl font-display font-bold mt-0.5">₹4,28,000</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-emerald-400 text-xs font-mono bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20 block">
-                        +28.4% ↑
-                      </span>
-                      <p className="text-gray-600 text-[9px] font-mono mt-1">vs last month</p>
-                    </div>
+              {/* Stats grid */}
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                {stats.map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 + i * 0.08 }}
+                    className="rounded-lg p-4"
+                    style={{ background: 'rgb(22 22 32)', border: '1px solid rgb(40 40 55)' }}
+                  >
+                    <p className="font-display font-extrabold text-2xl text-brand-400 leading-tight">{s.value}</p>
+                    <p className="text-gray-500 text-xs font-mono mt-1">{s.label}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Revenue bar */}
+              <div
+                className="rounded-lg p-4 mb-5"
+                style={{ background: 'rgb(22 22 32)', border: '1px solid rgb(40 40 55)' }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <p className="text-gray-500 text-[10px] font-mono uppercase tracking-wider">Revenue Generated for Clients</p>
+                    <p className="text-white font-display font-bold text-xl mt-0.5">₹12.4 Cr+</p>
                   </div>
-                  {/* Animated bar chart */}
-                  <div className="flex items-end gap-1 h-20">
-                    {[38, 62, 44, 78, 54, 88, 68, 93, 74, 100, 84, 70].map((h, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ scaleY: 0 }}
-                        animate={{ scaleY: 1 }}
-                        transition={{ delay: 0.65 + i * 0.05, duration: 0.4 }}
-                        style={{ height: `${h}%`, originY: 1 }}
-                        className={`flex-1 rounded-sm ${
-                          i === 9
-                            ? 'bg-gradient-to-t from-brand-600 to-brand-300 shadow-sm shadow-brand-500/40'
-                            : i >= 7
-                            ? 'bg-white/[0.12]'
-                            : 'bg-white/[0.07]'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <span className="text-emerald-400 text-xs font-mono">+34% YoY</span>
                 </div>
-
-                {/* Mini stat row */}
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { label: 'Projects', value: '50+', color: 'text-brand-400',  bg: 'bg-brand-500/10',  border: 'border-brand-500/20' },
-                    { label: 'Clients',  value: '30+', color: 'text-accent-400', bg: 'bg-accent-500/10', border: 'border-accent-500/20' },
-                    { label: 'Rating',   value: '5.0★', color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' },
-                  ].map((s) => (
-                    <div key={s.label} className={`${s.bg} border ${s.border} rounded-xl p-2.5 text-center`}>
-                      <p className={`font-display font-bold text-sm ${s.color}`}>{s.value}</p>
-                      <p className="text-gray-600 text-[10px] font-mono mt-0.5">{s.label}</p>
-                    </div>
+                <div className="flex items-end gap-1 h-14">
+                  {[30, 48, 38, 62, 55, 74, 60, 88, 72, 96, 80, 100].map((h, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ scaleY: 0 }}
+                      animate={{ scaleY: 1 }}
+                      transition={{ delay: 0.6 + i * 0.04, duration: 0.35 }}
+                      style={{ height: `${h}%`, originY: 1 }}
+                      className={`flex-1 rounded-sm ${i >= 9 ? 'bg-brand-500' : 'bg-white/10'}`}
+                    />
                   ))}
                 </div>
               </div>
-            </motion.div>
 
-            {/* Floating stat cards */}
-            {floatingCards.map((card, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.85 + card.delay, duration: 0.5 }}
-                className={`absolute ${card.position} hidden sm:block z-10`}
-                style={{
-                  animation: `float ${5 + i * 1.5}s ease-in-out infinite`,
-                  animationDelay: `${i * 0.8}s`,
-                }}
-              >
-                <div
-                  className={`glass-card bg-gradient-to-br ${card.gradient} border ${card.border} px-4 py-3 rounded-2xl backdrop-blur-xl`}
-                  style={{ boxShadow: card.glow }}
-                >
-                  <div className="flex items-center gap-2 mb-1.5">
-                    {card.icon}
-                    <span className="text-gray-400 text-[10px] font-mono uppercase tracking-wider">{card.title}</span>
+              {/* Highlights row */}
+              <div className="grid grid-cols-3 gap-2">
+                {highlights.map(({ icon: Icon, label }) => (
+                  <div
+                    key={label}
+                    className="flex flex-col items-center gap-1.5 py-3 rounded-lg"
+                    style={{ background: 'rgba(227,24,55,0.06)', border: '1px solid rgba(227,24,55,0.15)' }}
+                  >
+                    <Icon className="w-4 h-4 text-brand-400" />
+                    <span className="text-[10px] font-mono text-gray-400 text-center leading-tight">{label}</span>
                   </div>
-                  <p className="text-white text-base font-display font-bold leading-tight">{card.value}</p>
-                  <p className="text-gray-500 text-[9px] font-mono mt-0.5">{card.sub}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Floating rating badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="absolute -bottom-4 -left-4 rounded-xl border px-4 py-3 shadow-lg hidden sm:flex items-center gap-3"
+              style={{ background: 'rgb(22 22 32)', borderColor: 'rgba(251,146,60,0.3)' }}
+            >
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
+                style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.2)' }}>
+                ⭐
+              </div>
+              <div>
+                <p className="text-white font-display font-bold text-sm">5.0 Rating</p>
+                <p className="text-gray-500 text-[10px] font-mono">100% Client Satisfaction</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-gray-600 text-xs font-mono tracking-wider">scroll to explore</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-5 h-8 rounded-full border border-white/15 flex items-start justify-center pt-1.5"
-        >
-          <div className="w-1 h-2 rounded-full bg-gradient-to-b from-brand-500/90 to-transparent" />
-        </motion.div>
-      </motion.div>
+      {/* Bottom divider — red glow line transitioning to white sections */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-500/40 to-transparent" />
     </section>
   )
 }

@@ -1,6 +1,7 @@
 import PageWrapper from '../ui/PageWrapper'
 import Hero from '../sections/Hero'
 import Stats from '../sections/Stats'
+import ClientsStrip from '../sections/ClientsStrip'
 import ServicesSection from '../sections/ServicesSection'
 import WhyChooseMe from '../sections/WhyChooseMe'
 import Process from '../sections/Process'
@@ -14,6 +15,7 @@ export default function Home() {
     <PageWrapper>
       <Hero />
       <Stats />
+      <ClientsStrip />
       <ServicesSection />
       <WhyChooseMe />
       <Process />
